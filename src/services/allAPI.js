@@ -21,3 +21,10 @@ export const loginAPI = async(user)=>{
 export const addProjectAPI = async(reqBody,reqHeader)=>{
     return await commonAPI("POST",`${BASEURL}/projects/add`,reqBody,reqHeader)
 }
+
+//gethomeprojects
+
+export const homeProjectAPI = async()=>{
+    return await commonAPI("GET",`${BASEURL}/projects/homeprojects`,"","")
+}
+

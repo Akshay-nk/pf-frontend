@@ -3,10 +3,28 @@ import { Row, Col, Button } from 'react-bootstrap'
 import titleimage from '../assets/mernp1.gif'
 import ProjectCard from '../components/ProjectCard'
 import { Link } from 'react-router-dom'
+import { homeProjectAPI } from '../services/allAPI'
 
 
 function Home() {
+
+  const[homeProjects,setHomeProjects]=useState([])
   const [loggedin,setLoggedin]=useState(false)
+
+  const getHomeProjects=async()=>{
+
+     const result =await homeProjectAPI()
+     if(result.status===200){
+       setHomeProjects(result.data)
+     }
+     else{
+      console.log(result);
+      console.log(result.response);
+     }
+
+  }
+
+  console.log(homeProjects);
 
  useEffect(()=>{
   if(sessionStorage.getItem("token")){
@@ -15,6 +33,8 @@ function Home() {
   else{
     setLoggedin(false)
   }
+
+  getHomeProjects()
  },[])
 
     return (
@@ -46,29 +66,17 @@ function Home() {
                 <h1 className='fw-bolder text-center'>Explore Your Projects</h1>
    <marquee scrollAmount={25}>
                 <Row className='align-items-center'>
-                    <Col sm={12} md={6} lg={3}>
+                   {
+                    homeProjects?.length>0?homeProjects.map(project=>(
+                      <Col sm={12} md={6} lg={4}>
 
                       <ProjectCard/>  
 
                     </Col>
+                    )):null
+                 }
 
-                    <Col sm={12} md={6} lg={3}>
-
-                      <ProjectCard/>  
-
-                    </Col>
-
-                    <Col sm={12} md={6} lg={3}>
-
-                      <ProjectCard/>  
-
-                    </Col>
-
-                    <Col sm={12} md={6} lg={3}>
-
-                      <ProjectCard/>  
-
-                    </Col>
+                   
                 </Row>
                 </marquee>
 
