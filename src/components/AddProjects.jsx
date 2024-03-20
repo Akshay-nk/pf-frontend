@@ -144,8 +144,5 @@ function AddProjects() {
 
 export default AddProjects
 
-// const [projectDetails,setProjectDetails]=useState({
-//   title:"",languages:"",github:"",wesite:"",overview:"",projectImage:""
-// })
 
 

@@ -70,7 +70,7 @@ function Home() {
                     homeProjects?.length>0?homeProjects.map(project=>(
                       <Col sm={12} md={6} lg={4}>
 
-                      <ProjectCard/>  
+                      <ProjectCard project={project}/>  
 
                     </Col>
                     )):null

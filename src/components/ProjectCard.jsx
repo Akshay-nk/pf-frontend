@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Card, Col, Modal, Row } from 'react-bootstrap'
 import projectpic from '../assets/mernp.jpg'
+import { BASEURL } from '../services/BaseURL';
 
 
 
 
 
-function ProjectCard() {
+function ProjectCard({project}) {
 
   const [show, setShow] = useState(false);
 
@@ -15,9 +16,9 @@ function ProjectCard() {
   return (
     <>
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={projectpic} onClick={handleShow} />
+      <Card.Img variant="top" src={project?`${BASEURL}/uploads/${project?.projectImage}`:projectpic} onClick={handleShow} />
       <Card.Body>
-        <Card.Title>Project Title</Card.Title>
+        <Card.Title>{project?.title}</Card.Title>
         
         
       </Card.Body>
@@ -25,7 +26,7 @@ function ProjectCard() {
 
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>{project?.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row>
@@ -34,15 +35,15 @@ function ProjectCard() {
             </Col>
 
             <Col md={6}>
-             <h2 className='fw-bolder'>Project Title</h2>
-             <p>Some quick example text to build on the card title and make up the bulk of</p>
-             <p>Language Used: <span className='fw-bolder'>ReactJS, NodeJS, ExpressJS, MongoDB</span></p>
+             <h2 className='fw-bolder'>{project?.title}</h2>
+             <p>{project?.overview}</p>
+             <p>Language Used: <span className='fw-bolder'>{project?.languages}</span></p>
             </Col>
           </Row>
 
           <div>
-            <a href="" className='me-3 btn text-dark'><i class="fa-brands fa-github"></i></a>
-            <a href=""  className='me-3 btn text-dark'><i class="fa-solid fa-link"></i></a>
+            <a href={project?.github} className='me-3 btn text-dark'><i class="fa-brands fa-github"></i></a>
+            <a href={project?.website}  className='me-3 btn text-dark'><i class="fa-solid fa-link"></i></a>
           </div>
         </Modal.Body>
         
