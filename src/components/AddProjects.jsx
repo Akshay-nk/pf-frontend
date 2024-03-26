@@ -1,14 +1,17 @@
 import { Button, Modal } from 'react-bootstrap';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { addProjectAPI } from '../services/allAPI';
+import { addProjectResponseContext } from './context/ContextShare';
 
 function AddProjects() {
 
+  const {addProjectResponse,setAddProjectResponse}=useContext(addProjectResponseContext)
   const [token,setToken]=useState("")
 
   const [projectDetails,setProjectDetails]=useState({
     title:"",languages:"",github:"",website:"",overview:"",projectImage:""
   })
+  
 
   const [preview,setPreview]=useState("")
    useEffect(()=>{
@@ -67,7 +70,7 @@ function AddProjects() {
         if(result.status===200){
           console.log(result.data)
           handleClose()
-          alert('Projects added')
+          setAddProjectResponse(result.data)
         }
         else{
           console.log(result)

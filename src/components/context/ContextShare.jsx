@@ -8,12 +8,29 @@ function ContextShare({children}) {
   return (
    <>
 
-  <addProjectResponse.Provider value={{addProjectResponse, setAddProjectResponse}}>
+  <addProjectResponseContext.Provider value={{addProjectResponse, setAddProjectResponse}}>
     {children}
-  </addProjectResponse.Provider>
+  </addProjectResponseContext.Provider>
 
    </>
   )
 }
 
 export default ContextShare
+
+
+// import React, { createContext, useState } from 'react';
+
+// export const AddProjectResponseContext = createContext();
+
+// function ContextShare({ children }) {
+//   const [addProjectResponse, setAddProjectResponse] = useState({});
+
+//   return (
+//     <AddProjectResponseContext.Provider value={{ addProjectResponse, setAddProjectResponse }}>
+//       {children}
+//     </AddProjectResponseContext.Provider>
+//   );
+// }
+
+// export default ContextShare;

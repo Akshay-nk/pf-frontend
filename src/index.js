@@ -11,13 +11,13 @@ import ContextShare from './components/context/ContextShare';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-
+  <BrowserRouter>
    <ContextShare>
-   <BrowserRouter>
-   <App />
-   </BrowserRouter>
-   </ContextShare>
    
+   <App />
+   
+   </ContextShare>
+   </BrowserRouter>
   </React.StrictMode>
 );
 

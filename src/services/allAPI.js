@@ -40,4 +40,10 @@ export const userProjectAPI = async(reqHeader)=>{
 }
 
 
+//edit project
+
+export const editProjectAPI = async(projectId,reqBody,reqHeader)=>{
+    return await commonAPI("PUT",`${BASEURL}/projects/edit/${projectId}`,reqBody,reqHeader)
+}
+
 

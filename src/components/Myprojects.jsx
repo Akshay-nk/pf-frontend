@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AddProjects from './AddProjects'
 import { userProjectAPI } from '../services/allAPI'
+import { addProjectResponseContext } from './context/ContextShare'
+import { Alert } from 'react-bootstrap'
+import EditProject from './EditProject'
 
 function MyProjects() {
   
   const [userProjects,setUserProjects]=useState([])
+
+  const {addProjectResponse,setAddProjectResponse}=useContext(addProjectResponseContext)
 
   const getUserProjects=async()=>{
     if(sessionStorage.getItem("token")){
@@ -25,7 +30,7 @@ function MyProjects() {
 
   useEffect(()=>{
     getUserProjects()
-  },[])
+  },[addProjectResponse])
 
   return (
     <div className='card shadow p-3 mt-3'>
@@ -36,13 +41,22 @@ function MyProjects() {
         </div>
       </div>
     
+
+     {/* alert */}
+     {
+      addProjectResponse.title?<Alert className='bg-success' dismissible><span className='text-danger fw-bolder'> 
+      {addProjectResponse.title} Project added successfully</span></Alert>:null
+     }
+
       <div className="mt-4">
       {/* collection of projects */}
       { userProjects?.length>0?userProjects.map(project=>(
         <div className="border d-flex align-items-center rounded p-2">
         <h5>{project.title}</h5>
         <div className="icon ms-auto">
-          <button className="btn"><i class="fa-solid fa-pen-to-square"></i></button>
+         
+          <EditProject project={project}/>
+          
           <a href={project.github} target='_blank' className="btn"><i class="fa-brands fa-github"></i></a>
           <button className="btn"><i class="fa-solid fa-trash"></i></button>
         </div>
